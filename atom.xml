@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>芝麻绿豆</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://mungozhang.github.io/"/>
+  <updated>2020-06-27T03:22:48.950Z</updated>
+  <id>https://mungozhang.github.io/</id>
+  
+  <author>
+    <name>mungo</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://mungozhang.github.io/2020/06/27/test/"/>
+    <id>https://mungozhang.github.io/2020/06/27/test/</id>
+    <published>2020-06-27T03:22:48.950Z</published>
+    <updated>2020-06-27T03:22:48.950Z</updated>
+    
+    <content type="html"><![CDATA[<p>test test test</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;test test test&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vuecli4整合ant-design-vue踩过的坑</title>
+    <link href="https://mungozhang.github.io/2020/06/27/vuecli4%E6%95%B4%E5%90%88ant-design-vue%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/"/>
+    <id>https://mungozhang.github.io/2020/06/27/vuecli4%E6%95%B4%E5%90%88ant-design-vue%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/</id>
+    <published>2020-06-27T03:09:46.000Z</published>
+    <updated>2020-06-27T03:22:48.950Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h1><p>参考ant-design-vue官网，这里不再累述，配置按需加载<br>另外需要注意，配置按需引入需要这样的配置</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//babel.config.js</span></span><br><span class="line">plugins: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"import"</span>,</span><br><span class="line">      &#123; <span class="attr">libraryName</span>: <span class="string">"ant-design-vue"</span>, <span class="attr">libraryDirectory</span>: <span class="string">"es"</span>, <span class="attr">style</span>: <span class="literal">true</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure><h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h1><h2 id="1-提示没有less-loader"><a href="#1-提示没有less-loader" class="headerlink" title="1. 提示没有less-loader"></a>1. 提示没有less-loader</h2><p>vuecli4创建时，默认没有添加less，这里进行添加，首选需要确定项目已存在<code>less</code>和<code>less-loader</code>插件，若没有，安装</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add less less-loader -D</span><br></pre></td></tr></table></figure><p>其次使用<code>style-resources-loader</code>插件进行less配置,安装过程中选择<code>less</code></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vue add style-resources-loader -D</span><br><span class="line"><span class="comment"># 选择less</span></span><br></pre></td></tr></table></figure><h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><p>这样做完之后，如果<code>less</code>版本大于3，启动项目会遇到一个报错，提示关键字<code>javascriptEnabled</code>，此时需要配置less的这个选项，配置如下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"></span><br><span class="line">css: &#123;</span><br><span class="line">    loaderOptions: &#123;</span><br><span class="line">      less: &#123;</span><br><span class="line">        lessOptions: &#123;</span><br><span class="line">            <span class="comment">// 这里是api变动</span></span><br><span class="line">          javascriptEnabled: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      使用vuecli创建项目，整合ant-design-vue，中间踩过的坑，记录一下
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>win10安装压缩版mongodb</title>
+    <link href="https://mungozhang.github.io/2020/06/26/win10%E5%AE%89%E8%A3%85%E5%8E%8B%E7%BC%A9%E7%89%88mongodb/"/>
+    <id>https://mungozhang.github.io/2020/06/26/win10%E5%AE%89%E8%A3%85%E5%8E%8B%E7%BC%A9%E7%89%88mongodb/</id>
+    <published>2020-06-26T03:29:40.000Z</published>
+    <updated>2020-06-27T03:22:48.950Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>官网下载最新压缩版，并解压</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol><li>管理员身份打开 cmd，切换到安装目录下的 bin 目录</li><li>分别创建 data 文件夹，logs 文件夹</li><li>data 文件夹下创建 db 文件夹，logs 文件夹下创建 MongoDB.log 文件；</li><li>创建 mongo.config 配置文件，配置如下内容</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据库文件路径</span></span><br><span class="line">dbpath=安装目录\data</span><br><span class="line"><span class="comment"># 日志文件</span></span><br><span class="line">logpath=安装路径\logs\MongoDB.log</span><br><span class="line"><span class="comment"># 日志模式为追加模式</span></span><br><span class="line">logappend=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 启用日志文件，默认启用</span></span><br><span class="line">journal=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 过滤无用日志信息</span></span><br><span class="line">quiet=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 端口号 默认为 27017</span></span><br><span class="line">port=27017</span><br></pre></td></tr></table></figure><ol start="6"><li>命令行输入 mongod –config “安装目录\mongo.conf”，安装完成</li><li>作为系统服务：mongod –config “安装目录\mongo.conf” –install –serviceName “MongoDB”</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      win10安装压缩版mongodb过程记录
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vscode整合prettier、eslint</title>
+    <link href="https://mungozhang.github.io/2020/06/26/vscode%E6%95%B4%E5%90%88prettier%E3%80%81eslint/"/>
+    <id>https://mungozhang.github.io/2020/06/26/vscode%E6%95%B4%E5%90%88prettier%E3%80%81eslint/</id>
+    <published>2020-06-26T01:26:47.000Z</published>
+    <updated>2020-06-27T03:22:48.950Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>最近在学习 react，通过 create-react-app 创建项目，发现项目中只整合了 eslint，并没有整合 prettier，通过一顿摸索及查阅资料，整合成功。特记录下来过程，以备不时之需。</p><p><strong>本文首发自 csdn</strong></p><h1 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h1><ul><li>编辑器<code>vscode</code>，并且已经安装好<code>eslint</code>和<code>prettier</code>插件</li><li>使用 creat-react-app 创建项目</li></ul><h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p> <strong>不可再安装eslint，否则会配置失败</strong></p><h2 id="安装-prettier"><a href="#安装-prettier" class="headerlink" title="安装 prettier"></a>安装 prettier</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add eslint-plugin-prettie -dev</span><br><span class="line">yarn add eslint-config-prettier -dev</span><br><span class="line">yarn add prettier -dev</span><br></pre></td></tr></table></figure><h2 id="创建-eslintrc-js-配置如下"><a href="#创建-eslintrc-js-配置如下" class="headerlink" title="创建.eslintrc.js 配置如下"></a>创建.eslintrc.js 配置如下</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="string">"extends"</span>: [</span><br><span class="line">      <span class="string">"react-app"</span>,</span><br><span class="line">      <span class="string">"plugin:prettier/recommended"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="创建-prettierrc-文件，配置如下"><a href="#创建-prettierrc-文件，配置如下" class="headerlink" title="创建.prettierrc 文件，配置如下"></a>创建.prettierrc 文件，配置如下</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"singleQuote"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"semi"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这里我只配置了两个队则，使用单引号，结尾加分号，其他规则自行查阅相关资料</p><h2 id="提交时校验"><a href="#提交时校验" class="headerlink" title="提交时校验"></a>提交时校验</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add lint-staged husky -dev</span><br></pre></td></tr></table></figure><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//package.json增加配置</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"husky"</span>: &#123;</span><br><span class="line">    <span class="attr">"hooks"</span>: &#123;</span><br><span class="line">      <span class="attr">"pre-commit"</span>: <span class="string">"lint-staged"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"lint-staged"</span>: &#123;</span><br><span class="line">    <span class="attr">"src/*.&#123;js,jsx,mjs,ts,tsx&#125;"</span>: [</span><br><span class="line">      <span class="string">"node_modules/.bin/prettier --write"</span>,</span><br><span class="line">      <span class="string">"node_modules/.bin/eslint --fix"</span>,</span><br><span class="line">      <span class="string">"git add"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"src/*.&#123;css,scss,less,json,html,md,markdown&#125;"</span>: [</span><br><span class="line">      <span class="string">"node_modules/.bin/prettier --write"</span>,</span><br><span class="line">      <span class="string">"git add"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="vscode-保存自动格式化"><a href="#vscode-保存自动格式化" class="headerlink" title="vscode 保存自动格式化"></a>vscode 保存自动格式化</h2><p>配置 setting.json 如下</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"editor.codeActionsOnSave"</span>: &#123;</span><br><span class="line">    <span class="attr">"source.fixAll"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      create-react-app整合eslint、prettier；vscode配置自动格式化；git提交代码自动检查
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>你不知道的js阅读笔记（1）</title>
+    <link href="https://mungozhang.github.io/2020/06/19/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84js%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/"/>
+    <id>https://mungozhang.github.io/2020/06/19/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84js%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/</id>
+    <published>2020-06-19T10:10:20.000Z</published>
+    <updated>2020-06-27T03:22:48.950Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文是阅读&lt;&lt;你不知道的JavaScript&gt;&gt;这本书的阅读笔记</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本文是阅读&amp;lt;&amp;lt;你不知道的JavaScript&amp;gt;&amp;gt;这本书的阅读笔记&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
